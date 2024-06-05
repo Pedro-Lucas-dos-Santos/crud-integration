@@ -30,24 +30,38 @@ export default function Produtos() {
         buscarProdutos()
     }
 
+    const deletarProduto = async (id: any) => {
+        await ProdutosServices().deletarProduto(id)
+
+        buscarProdutos()
+    }
+
     useEffect(() => {
         buscarProdutos()
     }, [])
 
     return (
-        <div className="flex justify-center gap-7 m-2">
+        <div className="flex flex-col justify-center gap-7 m-2">
           {produtos.map((produto) => {
             return (
-             <div 
-             key={produto.id}
-             className={` bg-purple-600 rounded-md h-64 w-64 
-             flex flex-col justify-center items-center 
-             text-white`}
-             >
-                <div><strong>Nome:</strong> {produto.name}</div>
-                <div><strong>Categoria:</strong> {produto.category}</div>
-                <div><strong>Preço:</strong> {produto.price}</div>
-             </div>
+            <div key={produto.id}>
+                <div 
+                 className={` bg-purple-600 rounded-md h-64 w-64 
+                 flex flex-col justify-center items-center 
+                 text-white`}
+                >
+                    <div><strong>Nome:</strong> {produto.name}</div>
+                    <div><strong>Categoria:</strong> {produto.category}</div>
+                    <div><strong>Preço:</strong> {produto.price}</div>
+                </div>
+
+                <button 
+                className="bg-red-600 p-3 rounded mt-2 text-white"
+                onClick={() => deletarProduto(produto.id)}
+                >
+                    Deletar
+                </button>
+            </div>
             )
           })}
 

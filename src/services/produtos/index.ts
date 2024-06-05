@@ -24,5 +24,15 @@ export default function ProdutosServices() {
         }
     }
 
-    return { listarProdutos, criarProduto }; 
+    const deletarProduto = async (id: number) => {
+        try {
+            const api = await request.put(`/delete/produto/${id}`)
+
+            return api.data
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+    return { listarProdutos, criarProduto, deletarProduto }; 
 }
